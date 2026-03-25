@@ -29,6 +29,17 @@
   <div class="taskbar">
     <!-- <button class="start-btn"></button> -->
     <div class="start-btn"></div>
+    <div class="taskbar-apps" aria-label="Pinned apps">
+      <button class="taskbar-app" data-file="about.md" data-title="About Me" aria-label="Open About Me">
+        <img src="https://img.icons8.com/color/48/user.png" alt="" />
+      </button>
+      <button class="taskbar-app" data-file="projects.md" data-title="Projects" aria-label="Open Projects">
+        <img src="https://img.icons8.com/color/48/folder-invoices.png" alt="" />
+      </button>
+      <button class="taskbar-app" data-file="contact.md" data-title="Contact" aria-label="Open Contact">
+        <img src="https://img.icons8.com/color/48/email.png" alt="" />
+      </button>
+    </div>
 
     <div class="taskbar-spacer"></div>
     <div class="clock" id="clock"></div>
@@ -60,6 +71,7 @@
       <li><a href="#"><span>Computer</span></a></li>
     </ul>
   </div>
+  
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>

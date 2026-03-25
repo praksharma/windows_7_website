@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 460" role="img" aria-labelledby="title desc">
+  <title id="title">Profile illustration</title>
+  <desc id="desc">A stylized portrait illustration on a blue background.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d7ecff"/>
+      <stop offset="100%" stop-color="#73b5f6"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#254f8f"/>
+      <stop offset="100%" stop-color="#132a51"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="460" rx="28" fill="url(#bg)"/>
+  <circle cx="180" cy="145" r="78" fill="#f0c7a8"/>
+  <path d="M102 132c6-46 34-85 78-85s76 40 78 84c-18-11-35-16-52-16-19 0-34 5-48 11-14 6-29 12-56 6z" fill="#21304e"/>
+  <path d="M122 220h116c56 0 102 46 102 102v76H20v-76c0-56 46-102 102-102z" fill="url(#shirt)"/>
+  <path d="M140 210c12 18 26 26 40 26s28-8 40-26v36c-10 14-24 20-40 20s-30-6-40-20z" fill="#e4b18f"/>
+  <circle cx="151" cy="145" r="8" fill="#24324a"/>
+  <circle cx="209" cy="145" r="8" fill="#24324a"/>
+  <path d="M152 177c18 16 38 16 56 0" fill="none" stroke="#9d5f53" stroke-linecap="round" stroke-width="7"/>
+  <rect x="44" y="38" width="88" height="12" rx="6" fill="#ffffff" opacity="0.45"/>
+  <rect x="44" y="58" width="56" height="12" rx="6" fill="#ffffff" opacity="0.3"/>
+</svg>
