@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Win7 Themed Site</title>
+  <link rel="stylesheet" href="https://unpkg.com/7.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Desktop icons -->
+  <div class="desktop">
+    <div class="icon" data-file="about.md" data-title="About Me">
+      <img src="https://img.icons8.com/color/48/user.png"/>
+      <span>About Me</span>
+    </div>
+    <div class="icon" data-file="projects.md" data-title="Projects">
+      <img src="https://img.icons8.com/color/48/folder-invoices.png"/>
+      <span>Projects</span>
+    </div>
+    <div class="icon" data-file="contact.md" data-title="Contact">
+      <img src="https://img.icons8.com/color/48/email.png"/>
+      <span>Contact</span>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <!-- <button class="start-btn"></button> -->
+    <div class="start-btn"></div>
+
+    <div class="taskbar-spacer"></div>
+    <div class="clock" id="clock"></div>
+  </div>
+<!-- startmenu -->
+<div id="startmenu" class="hidden">
+    <ul id="applications">
+      <li><a href="#">
+        <img src="https://img.icons8.com/color/48/000000/folder-invoices.png" alt="Projects" /> My Projects
+      </a></li>
+      <li><a href="#">
+        <img src="https://img.icons8.com/color/48/000000/email.png" alt="Contact" /> Contact
+      </a></li>
+      <li><a href="#">
+        <img src="https://img.icons8.com/color/48/000000/user-male-circle.png" alt="Profile" /> Profile
+      </a></li>
+      <li class="search">
+        <form><input type="text" placeholder="Search programs and files" /></form>
+      </li>
+    </ul>
+  
+    <ul id="sysdir">
+      <li class="user">
+        <img src="https://img.icons8.com/color/48/000000/user-male-circle.png" alt="User" />
+      </li>
+      <li><a href="#"><span>Documents</span></a></li>
+      <li><a href="#"><span>Pictures</span></a></li>
+      <li><a href="#"><span>Music</span></a></li>
+      <li><a href="#"><span>Computer</span></a></li>
+    </ul>
+  </div>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+  <script src="script.js"></script> 
+  
+</body>
+</html>

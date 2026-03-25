@@ -1,0 +1,16 @@
+body {
+    background: url("./wall.jpg") no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 20px;
+    font-family: sans-serif;
+  }
+  
+  .window {
+    width: 320px;
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    cursor: grab;
+  }
+  

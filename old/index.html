@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7.css Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/7.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="window active" id="myWindow">
+    <div class="title-bar">
+      <div class="title-bar-text">My App</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close" id="closeBtn"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <p>Hello from Windows 7 style!</p>
+      <section class="field-row" style="justify-content: flex-end">
+        <button id="okBtn">OK</button>
+        <button id="cancelBtn">Cancel</button>
+      </section>
+    </div>
+  </div>
+  <div class="background"id="myWindow">
+    <div class="window glass active" >
+      <div class="title-bar">
+        <div class="title-bar-text">A glass window frame</div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="window-body has-space">
+        <p>The background behind is blurred.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
