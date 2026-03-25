@@ -11,12 +11,16 @@ Current structure:
 
 ## Current features
 
+- A fake Vista-style logon screen appears on first load and can be reopened from the Start menu with `Lock`.
 - Desktop icons open markdown files from `content/`.
 - Pinned taskbar apps open the same windows as the desktop icons.
+- Start menu app entries open the same windows as the desktop and taskbar icons.
 - Each app keeps a single window instance instead of opening duplicates.
 - Windows can be dragged, minimized, maximized, restored, and closed.
 - The taskbar highlights which app is open and which one is active.
 - The system tray is currently visual only.
+- A decorative desktop right-click context menu is included for presentation only.
+- Core app icons are served from local `assets/` files instead of remote icon URLs.
 
 ## Local development note
 
@@ -58,7 +62,7 @@ Example:
 
 ```html
 <div class="icon" data-file="notes.md" data-title="Notes">
-  <img src="https://img.icons8.com/color/48/notepad.png" alt="Notes" />
+  <img src="assets/icon-folder.svg" alt="Notes" />
   <span>Notes</span>
 </div>
 ```
@@ -71,14 +75,26 @@ How it works:
 
 ## Optional start menu entry
 
-The start menu links in `index.html` are currently visual only and do not open markdown windows yet.
+The Start menu app links in `index.html` can use the same `data-file` and `data-title` pattern as the desktop icons.
 
-If you want a new item to appear there as well, add another `<li>` under `#applications` in `index.html`. If you want, this can be wired up next so start menu items open the same markdown windows as desktop icons.
+Example:
+
+```html
+<li>
+  <a href="#" data-file="notes.md" data-title="Notes">
+    <img src="assets/icon-folder.svg" alt="Notes" /> Notes
+  </a>
+</li>
+```
+
+The `Lock` link in the right-hand column reopens the fake logon screen.
 
 ## Current flow
 
 - Add content in `content/*.md`
 - Point a desktop icon at that file with `data-file`
+- Optionally add a Start menu app link with the same `data-file` and `data-title`
 - Optionally add a pinned taskbar app button that uses the same `data-file` and `data-title`
 - Double-click the desktop icon to open it
+- Click the Start menu app entry to open the same window
 - Click the pinned taskbar app to open, focus, minimize, or restore the same window
