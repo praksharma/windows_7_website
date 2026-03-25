@@ -1,4 +1,10 @@
 export const desktopIcons = document.querySelectorAll(".icon");
+export const desktopArea = document.querySelector(".desktop");
 export const clockElement = document.getElementById("clock");
+export const loginScreen = document.getElementById("login-screen");
+export const loginEnterButton = document.getElementById("login-enter-button");
 export const startButton = document.querySelector(".start-btn");
 export const startMenu = document.getElementById("startmenu");
+export const startMenuAppLinks = document.querySelectorAll("#applications a[data-file]");
+export const desktopContextMenu = document.getElementById("desktop-context-menu");
+export const lockScreenLink = document.getElementById("lock-screen-link");

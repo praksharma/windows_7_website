@@ -1,0 +1,5 @@
+.desktop-context-menu {
+  position: absolute;
+  z-index: 999998;
+  width: 190px;
+}

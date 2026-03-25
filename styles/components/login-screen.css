@@ -1,0 +1,55 @@
+.login-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000001;
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(rgba(8, 20, 40, 0.18), rgba(8, 20, 40, 0.28)),
+    url("../../assets/windows_vista_ultimate_logon_screen.png") no-repeat center center;
+  background-size: cover;
+}
+
+.login-screen.hidden {
+  display: none;
+}
+
+.login-panel {
+  width: min(360px, calc(100vw - 32px));
+  padding: 28px 24px 22px;
+  color: white;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 14px;
+  background: rgba(12, 24, 48, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 18px 48px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.login-avatar {
+  width: 92px;
+  height: 92px;
+  margin-bottom: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+}
+
+.login-panel h1 {
+  margin: 0 0 8px;
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.login-panel p {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.98rem;
+}
+
+.login-button {
+  min-width: 132px;
+}

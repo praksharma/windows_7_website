@@ -8,22 +8,48 @@
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
+  <div class="login-screen" id="login-screen" aria-hidden="false">
+    <div class="login-panel">
+      <img class="login-avatar" src="assets/icon-user.svg" alt="User avatar" />
+      <h1>Prak Sharma</h1>
+      <p>Windows is ready. Click below to enter the desktop.</p>
+      <button class="login-button" id="login-enter-button" type="button">Log on</button>
+    </div>
+  </div>
 
   <!-- Desktop icons -->
   <div class="desktop">
     <div class="icon" data-file="about.md" data-title="About Me">
-      <img src="https://img.icons8.com/color/48/user.png"/>
+      <img src="assets/icon-user.svg" alt="About Me" />
       <span>About Me</span>
     </div>
     <div class="icon" data-file="projects.md" data-title="Projects">
-      <img src="https://img.icons8.com/color/48/folder-invoices.png"/>
+      <img src="assets/icon-folder.svg" alt="Projects" />
       <span>Projects</span>
     </div>
     <div class="icon" data-file="contact.md" data-title="Contact">
-      <img src="https://img.icons8.com/color/48/email.png"/>
+      <img src="assets/icon-mail.svg" alt="Contact" />
       <span>Contact</span>
     </div>
   </div>
+
+  <ul role="menu" class="desktop-context-menu hidden" id="desktop-context-menu" aria-hidden="true">
+    <li role="menuitem" tabindex="0" aria-haspopup="true">View</li>
+    <li role="menuitem" tabindex="0" aria-haspopup="true">
+      Sort by
+      <ul role="menu">
+        <li role="menuitem"><a href="#context-menu">Name</a></li>
+        <li role="menuitem"><a href="#context-menu">Item type</a></li>
+        <li role="menuitem"><a href="#context-menu">Date modified</a></li>
+      </ul>
+    </li>
+    <li role="menuitem" class="has-divider"><a href="#context-menu">Refresh</a></li>
+    <li role="menuitem" aria-disabled="true"><a href="#context-menu">Paste</a></li>
+    <li role="menuitem" aria-disabled="true" class="has-divider"><a href="#context-menu">Paste shortcut</a></li>
+    <li role="menuitem"><a href="#context-menu">Screen resolution</a></li>
+    <li role="menuitem"><a href="#context-menu">Gadgets</a></li>
+    <li role="menuitem"><a href="#context-menu">Personalize</a></li>
+  </ul>
 
   <!-- Taskbar -->
   <div class="taskbar">
@@ -31,13 +57,13 @@
     <div class="start-btn"></div>
     <div class="taskbar-apps" aria-label="Pinned apps">
       <button class="taskbar-app" data-file="about.md" data-title="About Me" aria-label="Open About Me">
-        <img src="https://img.icons8.com/color/48/user.png" alt="" />
+        <img src="assets/icon-user.svg" alt="" />
       </button>
       <button class="taskbar-app" data-file="projects.md" data-title="Projects" aria-label="Open Projects">
-        <img src="https://img.icons8.com/color/48/folder-invoices.png" alt="" />
+        <img src="assets/icon-folder.svg" alt="" />
       </button>
       <button class="taskbar-app" data-file="contact.md" data-title="Contact" aria-label="Open Contact">
-        <img src="https://img.icons8.com/color/48/email.png" alt="" />
+        <img src="assets/icon-mail.svg" alt="" />
       </button>
     </div>
 
@@ -66,14 +92,14 @@
 <!-- startmenu -->
 <div id="startmenu" class="hidden">
     <ul id="applications">
-      <li><a href="#">
-        <img src="https://img.icons8.com/color/48/000000/folder-invoices.png" alt="Projects" /> My Projects
+      <li><a href="#" data-file="projects.md" data-title="Projects">
+        <img src="assets/icon-folder.svg" alt="Projects" /> My Projects
       </a></li>
-      <li><a href="#">
-        <img src="https://img.icons8.com/color/48/000000/email.png" alt="Contact" /> Contact
+      <li><a href="#" data-file="contact.md" data-title="Contact">
+        <img src="assets/icon-mail.svg" alt="Contact" /> Contact
       </a></li>
-      <li><a href="#">
-        <img src="https://img.icons8.com/color/48/000000/user-male-circle.png" alt="Profile" /> Profile
+      <li><a href="#" data-file="about.md" data-title="About Me">
+        <img src="assets/icon-user.svg" alt="Profile" /> Profile
       </a></li>
       <li class="search">
         <form><input type="text" placeholder="Search programs and files" /></form>
@@ -82,12 +108,13 @@
   
     <ul id="sysdir">
       <li class="user">
-        <img src="https://img.icons8.com/color/48/000000/user-male-circle.png" alt="User" />
+        <img src="assets/icon-user.svg" alt="User" />
       </li>
       <li><a href="#"><span>Documents</span></a></li>
       <li><a href="#"><span>Pictures</span></a></li>
       <li><a href="#"><span>Music</span></a></li>
       <li><a href="#"><span>Computer</span></a></li>
+      <li><a href="#" id="lock-screen-link"><span>Lock</span></a></li>
     </ul>
   </div>
   

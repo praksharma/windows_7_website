@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Folder icon">
+  <defs>
+    <linearGradient id="folderTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe18d"/>
+      <stop offset="100%" stop-color="#f2b11f"/>
+    </linearGradient>
+    <linearGradient id="folderBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd34f"/>
+      <stop offset="100%" stop-color="#e29a00"/>
+    </linearGradient>
+  </defs>
+  <path d="M5 14h14l4 4h20v5H5z" fill="url(#folderTop)"/>
+  <path d="M5 18h38v20a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4z" fill="url(#folderBody)"/>
+  <path d="M5 19h38" stroke="#fff2b3" stroke-width="1.5" opacity="0.65"/>
+</svg>

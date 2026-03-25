@@ -9,6 +9,29 @@ Current structure:
 - `assets/` holds wallpaper and UI image assets.
 - `old/` keeps the earlier flat-file version for reference.
 
+## Current features
+
+- Desktop icons open markdown files from `content/`.
+- Pinned taskbar apps open the same windows as the desktop icons.
+- Each app keeps a single window instance instead of opening duplicates.
+- Windows can be dragged, minimized, maximized, restored, and closed.
+- The taskbar highlights which app is open and which one is active.
+- The system tray is currently visual only.
+
+## Local development note
+
+Open the site through a local server, not by double-clicking `index.html`.
+
+Examples:
+
+- VS Code Live Server
+- `python3 -m http.server`
+
+Why:
+
+- the windows load markdown with `fetch()`
+- `file://` loads can fail or behave inconsistently in the browser
+
 ## Add a new markdown app
 
 The desktop icons in `index.html` open markdown files from the `content/` folder.
@@ -56,4 +79,6 @@ If you want a new item to appear there as well, add another `<li>` under `#appli
 
 - Add content in `content/*.md`
 - Point a desktop icon at that file with `data-file`
-- Double-click the icon to open it in a draggable window
+- Optionally add a pinned taskbar app button that uses the same `data-file` and `data-title`
+- Double-click the desktop icon to open it
+- Click the pinned taskbar app to open, focus, minimize, or restore the same window
