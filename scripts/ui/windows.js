@@ -33,7 +33,7 @@ export function openMarkdownWindow(file, title) {
   const existingWindow = openWindows.get(file);
 
   if (existingWindow) {
-    focusWindow(existingWindow);
+    restoreOrFocusWindow(existingWindow);
     return Promise.resolve(existingWindow);
   }
 
@@ -174,12 +174,14 @@ function wireWindowControls(windowElement) {
     .querySelector('[aria-label="Minimize"]')
     .addEventListener("click", (event) => {
       event.preventDefault();
+      minimizeWindow(windowElement);
     });
 
   windowElement
     .querySelector('[aria-label="Maximize"]')
     .addEventListener("click", (event) => {
       event.preventDefault();
+      toggleMaximizeWindow(windowElement);
     });
 }
 
@@ -195,6 +197,10 @@ function closeWindow(windowElement) {
 }
 
 function focusWindow(windowElement) {
+  if (windowElement.classList.contains("is-minimized")) {
+    return;
+  }
+
   document.querySelectorAll(".window").forEach((element) => {
     element.classList.remove("active");
   });
@@ -215,4 +221,105 @@ function syncTaskbarState(activeFile = "") {
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
+}
+
+export function restoreOrFocusWindow(windowElement) {
+  if (windowElement.classList.contains("is-minimized")) {
+    windowElement.classList.remove("is-minimized");
+  }
+
+  focusWindow(windowElement);
+}
+
+export function toggleTaskbarWindow(file, title) {
+  const existingWindow = openWindows.get(file);
+
+  if (!existingWindow) {
+    return openMarkdownWindow(file, title);
+  }
+
+  if (existingWindow.classList.contains("active")) {
+    minimizeWindow(existingWindow);
+    return Promise.resolve(existingWindow);
+  }
+
+  restoreOrFocusWindow(existingWindow);
+  return Promise.resolve(existingWindow);
+}
+
+function minimizeWindow(windowElement) {
+  windowElement.classList.remove("active");
+  windowElement.classList.add("is-minimized");
+
+  focusTopVisibleWindow(windowElement);
+}
+
+function toggleMaximizeWindow(windowElement) {
+  if (windowElement.classList.contains("is-minimized")) {
+    windowElement.classList.remove("is-minimized");
+  }
+
+  if (windowElement.classList.contains("is-maximized")) {
+    restoreWindowSize(windowElement);
+    focusWindow(windowElement);
+    return;
+  }
+
+  saveWindowRect(windowElement);
+  windowElement.classList.add("is-maximized");
+  focusWindow(windowElement);
+}
+
+function restoreWindowSize(windowElement) {
+  const { restoreTop, restoreLeft, restoreWidth, restoreHeight } = windowElement.dataset;
+
+  windowElement.classList.remove("is-maximized");
+
+  if (restoreTop) {
+    windowElement.style.top = restoreTop;
+  }
+
+  if (restoreLeft) {
+    windowElement.style.left = restoreLeft;
+  }
+
+  if (restoreWidth) {
+    windowElement.style.width = restoreWidth;
+  } else {
+    windowElement.style.removeProperty("width");
+  }
+
+  if (restoreHeight) {
+    windowElement.style.height = restoreHeight;
+  } else {
+    windowElement.style.removeProperty("height");
+  }
+}
+
+function saveWindowRect(windowElement) {
+  const computedStyle = window.getComputedStyle(windowElement);
+
+  windowElement.dataset.restoreTop = computedStyle.top;
+  windowElement.dataset.restoreLeft = computedStyle.left;
+  windowElement.dataset.restoreWidth = computedStyle.width;
+  windowElement.dataset.restoreHeight = computedStyle.height;
+}
+
+function focusTopVisibleWindow(excludedWindow) {
+  const visibleWindows = Array.from(document.querySelectorAll(".window"))
+    .filter((element) => {
+      return element !== excludedWindow && !element.classList.contains("is-minimized");
+    })
+    .sort((firstWindow, secondWindow) => {
+      return Number(secondWindow.style.zIndex || 0) - Number(firstWindow.style.zIndex || 0);
+    });
+
+  const nextWindow = visibleWindows[0];
+
+  if (nextWindow) {
+    focusWindow(nextWindow);
+    return;
+  }
+
+  syncTaskbarState();
 }

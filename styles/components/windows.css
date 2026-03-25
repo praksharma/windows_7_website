@@ -5,6 +5,22 @@
   width: 400px;
 }
 
+.window.is-minimized {
+  display: none;
+}
+
+.window.is-maximized {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: calc(100vh - 48px) !important;
+}
+
+.window.is-maximized .window-body {
+  height: calc(100% - 30px);
+  overflow: auto;
+}
+
 .window .window-body {
   padding: 0;
 }
