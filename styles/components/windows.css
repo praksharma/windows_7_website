@@ -36,6 +36,34 @@
   color: #0b5db3;
 }
 
+.window[data-window-type="error"] {
+  width: 480px;
+}
+
+.window-error {
+  padding: 22px 24px 24px;
+}
+
+.window-error h1 {
+  font-size: 1.6rem;
+}
+
+.window-error code,
+.window-error-detail {
+  word-break: break-word;
+}
+
+.window-error-detail {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid #d3b2b2;
+  border-radius: 4px;
+  background: #fff2f2;
+  color: #7d2323;
+  font-family: monospace;
+  font-size: 0.92rem;
+}
+
 .window[data-window-type="about"] {
   width: 700px;
 }

@@ -27,8 +27,16 @@ export function makeDraggable(windowElement) {
 }
 
 export function openMarkdownWindow(file, title) {
-  fetch(`content/${file}`)
-    .then((response) => response.text())
+  const contentPath = `content/${file}`;
+
+  fetch(contentPath)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Unable to load ${contentPath} (${response.status} ${response.statusText})`);
+      }
+
+      return response.text();
+    })
     .then((markdown) => {
       const windowElement = document.createElement("div");
       const html = renderWindowContent(file, markdown);
@@ -46,6 +54,53 @@ export function openMarkdownWindow(file, title) {
         </div>
         <div class="window-body">
           ${html}
+        </div>
+      `;
+
+      document.body.appendChild(windowElement);
+      makeDraggable(windowElement);
+
+      windowElement
+        .querySelector('[aria-label="Close"]')
+        .addEventListener("click", () => {
+          windowElement.remove();
+        });
+
+      windowElement
+        .querySelector('[aria-label="Minimize"]')
+        .addEventListener("click", (event) => {
+          event.preventDefault();
+        });
+
+      windowElement
+        .querySelector('[aria-label="Maximize"]')
+        .addEventListener("click", (event) => {
+          event.preventDefault();
+        });
+    })
+    .catch((error) => {
+      console.error("Failed to open markdown window:", error);
+
+      const windowElement = document.createElement("div");
+
+      windowElement.className = "window glass active";
+      windowElement.dataset.windowType = "error";
+      windowElement.innerHTML = `
+        <div class="title-bar">
+          <div class="title-bar-text">${title}</div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize" title="Minimize"></button>
+            <button aria-label="Maximize" title="Maximize"></button>
+            <button aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <div class="markdown-content window-error">
+            <h1>Could not load this file</h1>
+            <p>The page tried to open <code>${contentPath}</code>, but the request failed.</p>
+            <p>This usually means the file path is wrong, the file name casing does not match exactly, or GitHub Pages did not publish the file where expected.</p>
+            <p class="window-error-detail">${escapeHtml(error.message)}</p>
+          </div>
         </div>
       `;
 
@@ -104,4 +159,13 @@ function renderWindowContent(file, markdown) {
   }
 
   return `<div class="markdown-content">${html}</div>`;
+}
+
+function escapeHtml(value) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
