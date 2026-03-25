@@ -170,11 +170,92 @@
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
 }
 
+.taskbar-notify {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  margin-left: 4px;
+  border-left: 1px solid rgba(28, 66, 106, 0.55);
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(16, 61, 105, 0.14) 100%
+    ),
+    rgba(31, 87, 136, 0.12);
+  box-shadow:
+    inset 1px 0 0 rgba(255, 255, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.taskbar-tray {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 100%;
+  padding: 0 5px 0 6px;
+}
+
+.tray-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex: 0 0 auto;
+  width: 26px;
+  height: 16px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.tray-glyph,
+.battery-icon {
+  display: block;
+  flex: 0 0 auto;
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  max-height: 100%;
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  image-rendering: auto;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
+}
+
+.tray-item--chevron .tray-glyph {
+  width: 10px;
+  height: 10px;
+}
+
+.battery-icon {
+  display: inline-block;
+  background: url("../../assets/battery_sprite.bmp") no-repeat -128px 0;
+  background-size: 688px 16px;
+}
+
 .clock {
-  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 66px;
+  padding: 0 6px 0 8px;
   color: white;
-  font-size: 0.86rem;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.clock-time {
+  font-size: 0.9rem;
+}
+
+.clock-date {
+  opacity: 0.95;
 }
 
 @media (max-width: 640px) {
@@ -196,5 +277,18 @@
   .taskbar-app img {
     width: 20px;
     height: 20px;
+  }
+
+  .taskbar-tray {
+    padding-left: 4px;
+  }
+
+  .taskbar-tray {
+    gap: 2px;
+  }
+
+  .clock {
+    min-width: 58px;
+    padding-right: 4px;
   }
 }
