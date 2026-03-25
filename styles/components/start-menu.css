@@ -1,0 +1,109 @@
+.start-btn {
+  position: absolute;
+  bottom: -8px;
+  left: 2px;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  background: url("../../assets/start-sprite.png") no-repeat 0 0;
+  background-size: 64px auto;
+}
+
+.start-btn:hover {
+  background-position: 0 -64px;
+}
+
+.start-btn:active {
+  background-position: 0 -128px;
+}
+
+#startmenu {
+  position: absolute;
+  bottom: 64px;
+  left: 0;
+  display: flex;
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px 6px 0 0;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+#applications {
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#applications li {
+  list-style: none;
+}
+
+#applications li a {
+  display: block;
+  padding: 6px;
+  color: #333;
+  text-decoration: none;
+}
+
+#applications li a img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.search {
+  padding: 5px;
+  background: #e4f4fc;
+}
+
+.search input {
+  width: 90%;
+  padding: 5px;
+  border: 1px solid #aaa;
+  font-size: 12px;
+}
+
+#sysdir {
+  width: 150px;
+  margin: 0;
+  padding: 0 0 0 10px;
+  list-style: none;
+}
+
+#sysdir li {
+  margin: 4px 0;
+}
+
+#sysdir li a {
+  display: block;
+  padding: 5px;
+  color: white;
+  text-decoration: none;
+}
+
+#sysdir li a:hover {
+  border-radius: 3px;
+  background: linear-gradient(
+    to right,
+    rgba(81, 115, 132, 0.55),
+    rgba(121, 163, 184, 0.55) 50%,
+    rgba(81, 115, 132, 0.55)
+  );
+}
+
+#sysdir .user {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+#sysdir .user img {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+}

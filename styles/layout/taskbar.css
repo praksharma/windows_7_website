@@ -1,0 +1,31 @@
+.taskbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  background:
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.05) 100%
+    ),
+    var(--glass-color);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 0 0 1px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(var(--blur-amount));
+  -webkit-backdrop-filter: blur(var(--blur-amount));
+}
+
+.taskbar-spacer {
+  flex-grow: 1;
+}
+
+.clock {
+  padding-right: 10px;
+  color: white;
+}
