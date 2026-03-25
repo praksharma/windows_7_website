@@ -1,3 +1,6 @@
+const openWindows = new Map();
+let nextWindowZIndex = 1000;
+
 export function makeDraggable(windowElement) {
   let isDragging = false;
   let offsetX = 0;
@@ -27,9 +30,16 @@ export function makeDraggable(windowElement) {
 }
 
 export function openMarkdownWindow(file, title) {
+  const existingWindow = openWindows.get(file);
+
+  if (existingWindow) {
+    focusWindow(existingWindow);
+    return Promise.resolve(existingWindow);
+  }
+
   const contentPath = `content/${file}`;
 
-  fetch(contentPath)
+  return fetch(contentPath)
     .then((response) => {
       if (!response.ok) {
         throw new Error(`Unable to load ${contentPath} (${response.status} ${response.statusText})`);
@@ -42,6 +52,7 @@ export function openMarkdownWindow(file, title) {
       const html = renderWindowContent(file, markdown);
 
       windowElement.className = "window glass active";
+      windowElement.dataset.windowFile = file;
       windowElement.dataset.windowType = getWindowType(file);
       windowElement.innerHTML = `
         <div class="title-bar">
@@ -59,24 +70,10 @@ export function openMarkdownWindow(file, title) {
 
       document.body.appendChild(windowElement);
       makeDraggable(windowElement);
+      registerWindow(windowElement, file);
+      focusWindow(windowElement);
 
-      windowElement
-        .querySelector('[aria-label="Close"]')
-        .addEventListener("click", () => {
-          windowElement.remove();
-        });
-
-      windowElement
-        .querySelector('[aria-label="Minimize"]')
-        .addEventListener("click", (event) => {
-          event.preventDefault();
-        });
-
-      windowElement
-        .querySelector('[aria-label="Maximize"]')
-        .addEventListener("click", (event) => {
-          event.preventDefault();
-        });
+      return windowElement;
     })
     .catch((error) => {
       console.error("Failed to open markdown window:", error);
@@ -106,24 +103,10 @@ export function openMarkdownWindow(file, title) {
 
       document.body.appendChild(windowElement);
       makeDraggable(windowElement);
+      wireWindowControls(windowElement);
+      focusWindow(windowElement);
 
-      windowElement
-        .querySelector('[aria-label="Close"]')
-        .addEventListener("click", () => {
-          windowElement.remove();
-        });
-
-      windowElement
-        .querySelector('[aria-label="Minimize"]')
-        .addEventListener("click", (event) => {
-          event.preventDefault();
-        });
-
-      windowElement
-        .querySelector('[aria-label="Maximize"]')
-        .addEventListener("click", (event) => {
-          event.preventDefault();
-        });
+      return windowElement;
     });
 }
 
@@ -168,4 +151,68 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
+}
+
+function registerWindow(windowElement, file) {
+  openWindows.set(file, windowElement);
+  wireWindowControls(windowElement);
+  syncTaskbarState();
+
+  windowElement.addEventListener("mousedown", () => {
+    focusWindow(windowElement);
+  });
+}
+
+function wireWindowControls(windowElement) {
+  windowElement
+    .querySelector('[aria-label="Close"]')
+    .addEventListener("click", () => {
+      closeWindow(windowElement);
+    });
+
+  windowElement
+    .querySelector('[aria-label="Minimize"]')
+    .addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+
+  windowElement
+    .querySelector('[aria-label="Maximize"]')
+    .addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+}
+
+function closeWindow(windowElement) {
+  const { windowFile } = windowElement.dataset;
+
+  if (windowFile) {
+    openWindows.delete(windowFile);
+  }
+
+  windowElement.remove();
+  syncTaskbarState();
+}
+
+function focusWindow(windowElement) {
+  document.querySelectorAll(".window").forEach((element) => {
+    element.classList.remove("active");
+  });
+
+  windowElement.classList.add("active");
+  windowElement.style.zIndex = String(nextWindowZIndex);
+  nextWindowZIndex += 1;
+
+  syncTaskbarState(windowElement.dataset.windowFile);
+}
+
+function syncTaskbarState(activeFile = "") {
+  document.querySelectorAll(".taskbar-app").forEach((button) => {
+    const isOpen = openWindows.has(button.dataset.file);
+    const isActive = button.dataset.file === activeFile;
+
+    button.classList.toggle("is-open", isOpen);
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
 }
